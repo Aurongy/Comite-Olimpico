@@ -1,0 +1,98 @@
+@startuml
+title Sistema de Monitoreo y Gestión Integral de Atletas
+
+class Atleta {
+  - id: Long
+  - nombre: String
+  - edad: Integer
+  - disciplina: String
+  - departamento: String
+  - nacionalidad: String
+  - fechaIngreso: LocalDate
+}
+
+class SesionEntrenamiento {
+  - id: Long
+  - atletaId: Long
+  - fecha: LocalDate
+  - tipo: String
+  - valor: Double
+  - unidad: String
+  - ubicacion: String
+  - pais: String
+}
+
+interface AtletaDAO {
+  + crear(a: Atleta): Atleta
+  + buscarPorId(id: long): Optional
+  + buscarTodos(): Lista
+  + actualizar(a: Atleta)
+  + eliminar(id: long)
+}
+
+interface EntrenamientoDAO {
+  + crear(t: SesionEntrenamiento): SesionEntrenamiento
+  + buscarPorAtletaId(id: long): List<SesionEntrenamiento>
+  + buscarTodos(): List<SesionEntrenamiento>
+}
+
+class MariaDBAtletaDAO
+class MariaDBEntrenamientoDAO
+
+AtletaDAO <|.. MariaDBAtletaDAO
+EntrenamientoDAO <|.. MariaDBEntrenamientoDAO
+
+
+class FabricaConexionMariaDB {
+  - url: String
+  - usuario: String
+  - contrasena: String
+  + getConexion(): Connection
+}
+
+MariaDBAtletaDAO --> FabricaConexionMariaDB
+MariaDBEntrenamientoDAO --> FabricaConexionMariaDB
+
+class UtilidadesJson {
+  + guardarAtletas(lista, ruta)
+  + cargarAtletas(ruta): Atleta
+  + guardarSesiones(lista, ruta)
+  + cargarSesiones(ruta): SesionEntrenamiento
+}
+
+class ExportadorCsv {
+  + exportarSesiones(lista, ruta)
+}
+
+
+class ServicioEstadisticas {
+  + promedio(lista): double
+  + mejorMarca(lista, maximizar: boolean): double
+  + ordenarPorFecha(lista): List<SesionEntrenamiento>
+  + promedioPorUbicacion(lista, ubicacion: String): double
+}
+
+class ServicioPlanilla {
+  - basePago: double
+  - bonoExtranjero: double
+  - bonoMejorMarca: double
+  + calcularSalarioMensual(atleta: Atleta, lista: List<SesionEntrenamiento>): double
+}
+
+class AplicacionCLI {
+  + main(args: String[])
+}
+
+AplicacionCLI --> AtletaDAO
+AplicacionCLI --> EntrenamientoDAO
+AplicacionCLI --> ServicioEstadisticas
+AplicacionCLI --> ServicioPlanilla
+AplicacionCLI --> UtilidadesJson
+AplicacionCLI --> ExportadorCsv
+
+
+Atleta "1" <-- "N" SesionEntrenamiento : tiene >
+
+
+
+@enduml
