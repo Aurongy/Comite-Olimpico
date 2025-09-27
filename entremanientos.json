@@ -1,0 +1,17 @@
+[ {
+  "id" : 1,
+  "nombre" : "ANGEL AURELIO TZI CUCUL",
+  "edad" : 23,
+  "disciplina" : "Atletismo",
+  "departamento" : "Guatemala",
+  "nacionalidad" : "Guatemalteco",
+  "fechaIngreso" : "2025-09-27"
+}, {
+  "id" : 2,
+  "nombre" : "ANGEL AURELIO TZI CUCUL",
+  "edad" : 23,
+  "disciplina" : "Atletismo",
+  "departamento" : "Sacatepequez",
+  "nacionalidad" : "Guatemalteco",
+  "fechaIngreso" : "2025-09-27"
+} ]

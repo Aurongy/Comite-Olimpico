@@ -1,0 +1,19 @@
+[ {
+  "id" : 1,
+  "atletaId" : 1,
+  "fecha" : "2025-09-27",
+  "tipo" : "resistencia",
+  "valor" : 9.9,
+  "unidad" : "3000",
+  "ubicacion" : "Nacional",
+  "pais" : null
+}, {
+  "id" : 2,
+  "atletaId" : 2,
+  "fecha" : "2025-09-27",
+  "tipo" : "tecnica",
+  "valor" : 9.8,
+  "unidad" : "100",
+  "ubicacion" : "Nacional",
+  "pais" : null
+} ]
